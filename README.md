@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assests/logo.png" width="110" alt="Click-Rem Logo" />
+  <img src="assets/logo.png" width="110" alt="Click-Rem Logo" />
 </p>
 
 <h1 align="center">Click-Rem</h1>
