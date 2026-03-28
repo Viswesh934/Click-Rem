@@ -1,4 +1,12 @@
-# Click-Rem 🚀
+<p align="center">
+  <img src="assests/logo.png" width="110" alt="Click-Rem Logo" />
+</p>
+
+<h1 align="center">Click-Rem</h1>
+
+<p align="center">
+  <strong>Type-safe analytics toolkit for ClickHouse ⚡</strong>
+</p>
 
 > Type-safe analytics toolkit for ClickHouse with first-class Fastify support
 
