@@ -1,22 +1,16 @@
 import 'dotenv/config'
-import { createClient } from '@clickhouse/client'
+import { createClient } from '../../packages/core/src/client'
 
 async function main() {
-  const client = createClient({
-    url: process.env.CLICKHOUSE_HOST!,
-    username: process.env.CLICKHOUSE_USERNAME!,
-    password: process.env.CLICKHOUSE_PASSWORD!,
-    database: process.env.CLICKHOUSE_DB!,
-  })
+  const db = createClient()
 
-  const result = await client.query({
-    query: 'SELECT 1 as number',
-    format: 'JSONEachRow'
-  })
+  const result = await db.sql<{ number: number }>`
+    SELECT 1 as number
+  `
 
-  console.log(await result.json())
+  console.log(result)
 
-  await client.close()
+  await db.close()
 }
 
 main()
