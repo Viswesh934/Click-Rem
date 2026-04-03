@@ -1,15 +1,7 @@
-import 'dotenv/config'
-
-import { createClient } from '../../packages/core/src/client/index.js'
+import {db} from './index'
 import { ch } from '../../packages/core/src/schema/column.js'
 import { chTable } from '../../packages/core/src/schema/table.js'
 
-const db = createClient({
-  url: process.env.CLICKHOUSE_HOST!,
-  username: process.env.CLICKHOUSE_USERNAME!,
-  password: process.env.CLICKHOUSE_PASSWORD!,
-  database: process.env.CLICKHOUSE_DB!
-})
 
 // 🔥 define schema (with config inside)
 const events = chTable(
@@ -18,7 +10,8 @@ const events = chTable(
     id: ch.uuid(),
     event: ch.string(),
     amount: ch.float64(),
-    timestamp: ch.datetime()
+    timestamp: ch.datetime(),
+    country: ch.string()
   },
   {
     orderBy: 'timestamp'
@@ -35,13 +28,15 @@ async function main() {
       id: crypto.randomUUID(),
       event: 'signup',
       amount: 10,
-      timestamp: new Date()
+      timestamp: new Date(),
+      country: "IN"
     },
     {
       id: crypto.randomUUID(),
       event: 'purchase',
       amount: 99,
-      timestamp: new Date()
+      timestamp: new Date(),
+      country: "IN"
     }
   ])
 
@@ -62,8 +57,8 @@ async function main() {
     event: 'purchase',
     amount: 120,
     timestamp: new Date(),
-    country: 'IN' // ⚠️ TS won't enforce yet (future improvement)
-  } as any) // temporary workaround
+    country: 'IN'
+  })
 
   console.log('--- Truncate table ---')
   await db.truncateTable(events)
