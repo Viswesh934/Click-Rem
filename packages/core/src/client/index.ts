@@ -2,13 +2,16 @@ import {
   createClient as createCHClient,
   type ClickHouseClient
 } from '@clickhouse/client'
-
-import type { Table, TableSchema } from '../schema/table.js'
-import type { Infer } from '../schema/infer.js'
-import { generateCreateTableSQL } from '../schema/toSQL.js'
-import { addColumn, dropColumn } from './alterTable.js'
-import type { Column } from '../schema/column.js'
-import type { CHPrimitive } from '../schema/types.js'
+import type { Table, TableSchema } from '../schema/table'
+import type { Infer } from '../schema/infer'
+import { generateCreateTableSQL } from '../schema/toSQL'
+import { addColumn, dropColumn } from './alterTable'
+import type { Column } from '../schema/column'
+import type { CHPrimitive } from '../schema/types'
+import { aggregate } from './aggregate'
+import type { Metric } from '../schema/metrics'
+import type { Dimension } from '../schema/dimensions'
+import type { Where } from '../schema/filters'
 
 export function createClient(config: {
   url: string
@@ -83,6 +86,18 @@ export function createClient(config: {
       return dropColumn(client, table, columnName)
     },
 
+     // 🔥Aggregate Function
+    async aggregate<
+  T extends TableSchema,
+  M extends Record<string, Metric>,
+  D extends Record<string, Dimension> | undefined = undefined
+>(
+  table: Table<T>,
+  query: { metrics: M; dimensions?: D, where?: Where<T> }
+) {
+  return aggregate(client, table, query)
+},
+
     // 🔥 RAW SQL (escape hatch)
     async sql<T = unknown>(
       strings: TemplateStringsArray,
@@ -97,6 +112,7 @@ export function createClient(config: {
 
       return res.json<T>()
     },
+
 
     async close(): Promise<void> {
       await client.close()

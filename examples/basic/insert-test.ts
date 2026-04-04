@@ -1,5 +1,4 @@
-import 'dotenv/config'
-import { createClient } from '../../packages/core/src/client/index.js'
+import {db} from './index'
 import { ch } from '../../packages/core/src/schema/column.js'
 import { chTable } from '../../packages/core/src/schema/table.js'
 
@@ -14,13 +13,6 @@ const events = chTable('events', {
 })
 
 async function main() {
-  const db = createClient({
-    url: process.env.CLICKHOUSE_HOST!,
-    username: process.env.CLICKHOUSE_USERNAME!,
-    password: process.env.CLICKHOUSE_PASSWORD!,
-    database: process.env.CLICKHOUSE_DB!
-  })
-
   // Table is auto-created on first insert if it doesn't exist
   await db.ensureTable(events)
   // No need to manually call createTable!
