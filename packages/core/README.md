@@ -1,3 +1,7 @@
+<p align="center">
+<img width="120" height="120" alt="image" src="https://github.com/user-attachments/assets/e7de241d-97bc-487d-aab8-b4f58e3265bc" />
+</p>
+
 # Click-Rem
 
 > **Type-safe analytics layer for ClickHouse** — Build metrics dashboards with confidence.
