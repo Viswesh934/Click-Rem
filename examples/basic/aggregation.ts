@@ -1,17 +1,5 @@
 import {db} from './index'
-import { ch } from '../../packages/core/src/schema/column.js'
-import { chTable } from '../../packages/core/src/schema/table.js'
-
-import {
-  sum,
-  avg,
-  min,
-  max,
-  count
-} from '../../packages/core/src/schema/metrics.js'
-
-import { day } from '../../packages/core/src/schema/dimensions.js'
-import { last7Days } from '../../packages/core/src/schema/time.js'
+import {ch,chTable,sum,avg,min,max,count,day,last7Days } from '../../packages/core/src'
 
 
 
