@@ -1,13 +1,17 @@
 {
-  "name": "core",
-  "version": "1.0.0",
-  "description": "",
+  "name": "click-rem",
+  "version": "0.1.0",
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "@clickhouse/client": "^1.18.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
 }

@@ -1,5 +1,5 @@
 import type { Column } from './column'
-import type { CHPrimitive } from './types'
+import type { CHPrimitive, EngineConfig } from './types'
 
 export type TableSchema = Record<string, Column<CHPrimitive>>
 
@@ -7,6 +7,8 @@ export type TableConfig<T extends TableSchema> = {
   orderBy: keyof T | (keyof T)[]
   primaryKey?: keyof T | (keyof T)[]
   partitionBy?: string
+  ttl?: string
+  engine?: EngineConfig
 }
 
 /**

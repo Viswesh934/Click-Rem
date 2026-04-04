@@ -1,3 +1,13 @@
+export type Engine =
+  | 'MergeTree'
+  | 'ReplacingMergeTree'
+  | 'SummingMergeTree'
+
+export type EngineConfig =
+  | { type: 'MergeTree' }
+  | { type: 'ReplacingMergeTree'; versionColumn?: string }
+  | { type: 'SummingMergeTree'; columns?: string[] }
+
 export type CHPrimitive =
   | 'UUID'
   | 'String'
@@ -38,3 +48,4 @@ export type NumericCHType =
   | 'UInt64'
   | 'Float32'
   | 'Float64'
+
